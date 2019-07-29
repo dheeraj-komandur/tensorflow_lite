@@ -1,0 +1,33 @@
+
+To train:
+
+python train.py --logtostderr --train_dir=C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\training\ --pipeline_config_path=C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\training\ssd_mobilenet_v1_coco.config
+
+
+To export:
+
+python export_inference_graph.py --input_type image_tensor --pipeline_config_path C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\training\ssd_mobilenet_v1_coco.config --trained_checkpoint_prefix C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\training\model.ckpt-20478 --output_directory C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\trained-inference-graphs\output_inference_graph_v1.pb
+
+
+To retrain:
+
+python train.py --logtostderr --train_dir=C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\training\ --pipeline_config_path=C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\training\pipeline.config
+
+
+
+tflite_convert --output_file C:/Users/lokeshj/Desktop/Tensorflow/workspace/training-demo/trained-inference-graphs/model.tflite \ --saved_model_dir   C:/Users/lokeshj/Desktop/Tensorflow/workspace/training-demo/trained-inference-graphs/saved_model \ --output_format TFLITE \ --inference_type FLOAT \ --input_arrays image_tensor \ --input_shapes 1,300,300,3 \ --output_arrays detection_boxes,detection_classes,detection_scores,num_detections
+python export_tflite_ssd_graph.py \ --pipeline_config_path=C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\training\ssd_mobilenet_v1_coco.config \ --trained_checkpoint_prefix=C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\training\model.ckpt-20478 \ --output_directory=C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\trained-inference-graphs \ --add_postprocessing_op=true
+
+
+
+#To deploy on Mobile
+
+Convert pb to lite pb:
+python export_tflite_ssd_graph.py --pipeline_config_path C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\training\ssd_mobilenet_v1_coco.config --trained_checkpoint_prefix C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\trained-inference-graphs\model.ckpt --output_directory C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\trained-inference-graphs\tflite --max_detections 13 --default_ranges_min=0 --default_ranges_max=6
+
+#Upload pb on colab and convert
+Convert pb to lite:
+tflite_convert --output_file=C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\trained-inference-graphs\test.tflite --graph_def_file=C:\Users\lokeshj\Desktop\Tensorflow\workspace\training-demo\trained-inference-graphs\tflite\tflite_graph.pb --input_arrays=normalized_input_image_tensor --output_arrays='TFLite_Detection_PostProcess','TFLite_Detection_PostProcess:1','TFLite_Detection_PostProcess:2','TFLite_Detection_PostProcess:3' --input_shape=1,300,300,3  --allow_custom_ops --default_ranges_min=0 --default_ranges_max=6
+
+
+
