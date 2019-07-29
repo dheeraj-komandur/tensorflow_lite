@@ -1,0 +1,55 @@
+item {
+    id: 1
+    name: 'NSI Cluster'
+}
+item {
+    id: 2
+    name: 'Text'
+}
+item {
+    id: 3
+    name: 'Fuel Low'
+}
+item {
+    id: 4
+    name: 'TC Off'
+}
+item {
+    id: 5
+    name: 'Traction Off'
+}
+item {
+    id: 6
+    name: 'Check Engine'
+}
+item {
+    id: 7
+    name: 'Fuel Meter'
+}
+item {
+    id: 8
+    name: 'Temp Meter'
+}
+item {
+    id: 9
+    name: 'Hood Open'
+}
+item {
+    id: 10
+    name: 'LB Press High'
+}
+item {
+    id: 11
+    name: 'Parking'
+}
+item {
+    id: 12
+    name: 'Rear Open'
+}
+item {
+    id: 13
+    name: 'RB Press High'
+}
+
+
+
